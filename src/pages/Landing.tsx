@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { 
   ArrowRight, 
-  Code, 
+  Code,
   Search, 
   Tags, 
   Folder, 
@@ -154,12 +154,19 @@ saveSnippet(snippet);\``;
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-background to-muted/30">
       {/* Header */}
       <header className="px-4 lg:px-6 h-16 flex items-center border-b border-border sticky top-0 bg-background/80 backdrop-blur-md z-50">
-        <Link to="/" className="flex items-center justify-center">
-          <motion.span 
-            className="font-bold text-2xl tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+        <Link to="/" className="flex items-center justify-center gap-2">
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+          >
+            <Code className="h-6 w-6 text-primary" />
+          </motion.div>
+          <motion.span 
+            className="font-bold text-2xl tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-jetbrains"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             SnipStash
           </motion.span>

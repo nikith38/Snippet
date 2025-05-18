@@ -165,21 +165,38 @@ saveSnippet(snippet);\``;
           </motion.span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            {user ? (
+          {user ? (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               <Button asChild>
                 <Link to="/snippets">My Snippets</Link>
               </Button>
-            ) : (
-              <Button asChild>
-                <Link to="/auth">Login</Link>
-              </Button>
-            )}
-          </motion.div>
+            </motion.div>
+          ) : (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <Button asChild variant="outline">
+                  <Link to="/auth">Login</Link>
+                </Button>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Button asChild>
+                  <Link to="/auth?mode=signup">Sign Up</Link>
+                </Button>
+              </motion.div>
+            </>
+          )}
         </nav>
       </header>
 

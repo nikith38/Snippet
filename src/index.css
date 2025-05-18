@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Fira+Code:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme as default */
+    --background: 0 0% 10%;  /* Dark background */
+    --foreground: 0 0% 95%; /* Light text */
+
+    --card: 0 0% 15%;  /* Slightly lighter dark */
+    --card-foreground: 0 0% 95%; /* Light text */
+
+    --popover: 0 0% 15%;  /* Slightly lighter dark */
+    --popover-foreground: 0 0% 95%; /* Light text */
+
+    --primary: 267 100% 74%; /* Purple */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 174 100% 37%; /* Teal */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 20%;  /* Medium dark gray */
+    --muted-foreground: 0 0% 70%; /* Light gray */
+
+    --accent: 267 100% 84%; /* Light Purple */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 25%; /* Medium dark gray border */
+    --input: 0 0% 25%; /* Medium dark gray input */
+    --ring: 267 100% 74%; /* Purple ring */
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 7%; /* Darker dark gray */
+    --sidebar-foreground: 0 0% 95%; /* Almost White */
+    --sidebar-primary: 267 100% 74%; /* Purple */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%; /* Slightly Lighter Gray */
+    --sidebar-accent-foreground: 0 0% 95%; /* Almost White */
+    --sidebar-border: 0 0% 20%; /* Medium Gray */
+    --sidebar-ring: 267 100% 74%; /* Purple */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+
+  code, pre {
+    @apply font-jetbrains;
+  }
+  
+  /* Add reduced motion option for accessibility */
+  @media (prefers-reduced-motion) {
+    * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}
+
+@layer components {
+  .snippet-card {
+    @apply bg-snippet-bg border border-snippet-border rounded-md overflow-hidden transition-all duration-300;
+  }
+
+  .code-editor {
+    @apply bg-snippet-code p-4 rounded-md font-jetbrains text-sm leading-relaxed;
+  }
+
+  .code-editor pre {
+    @apply overflow-x-auto;
+  }
+
+  .code-editor code {
+    @apply block whitespace-pre-wrap break-words;
+  }
+
+  /* Syntax highlighting colors */
+  .code-editor .token.comment,
+  .code-editor .token.prolog,
+  .code-editor .token.doctype,
+  .code-editor .token.cdata {
+    @apply text-muted-foreground;
+  }
+
+  .code-editor .token.punctuation {
+    @apply text-foreground/70;
+  }
+
+  .code-editor .token.property,
+  .code-editor .token.tag,
+  .code-editor .token.boolean,
+  .code-editor .token.number,
+  .code-editor .token.constant,
+  .code-editor .token.symbol {
+    @apply text-blue-400;
+  }
+
+  .code-editor .token.selector,
+  .code-editor .token.attr-name,
+  .code-editor .token.string,
+  .code-editor .token.char,
+  .code-editor .token.builtin {
+    @apply text-green-400;
+  }
+
+  .code-editor .token.operator,
+  .code-editor .token.entity,
+  .code-editor .token.url,
+  .code-editor .language-css .token.string,
+  .code-editor .style .token.string {
+    @apply text-yellow-400;
+  }
+
+  .code-editor .token.atrule,
+  .code-editor .token.attr-value,
+  .code-editor .token.keyword {
+    @apply text-purple-400;
+  }
+
+  .code-editor .token.function,
+  .code-editor .token.class-name {
+    @apply text-orange-400;
+  }
+
+  .code-editor .token.regex,
+  .code-editor .token.important,
+  .code-editor .token.variable {
+    @apply text-red-400;
+  }
+
+  .language-badge {
+    @apply text-xs font-semibold py-1 px-2 rounded-full uppercase;
+  }
+
+  .tag-pill {
+    @apply text-xs py-1 px-3 rounded-full bg-muted text-foreground inline-flex items-center gap-1.5 hover:bg-muted/80 transition-colors;
+  }
+
+  .tag-pill-auto {
+    @apply bg-primary/20 hover:bg-primary/30 text-primary-foreground;
+  }
+
+  .tag-pill-user {
+    @apply bg-accent/20 hover:bg-accent/30 text-accent-foreground;
+  }
+
+  .copy-button {
+    @apply p-1.5 rounded-md bg-muted/50 hover:bg-primary/20 transition-all absolute top-3 right-3;
+  }
+
+  .grid-bg {
+    @apply bg-grid-pattern bg-[length:20px_20px];
+  }
+
+  .typing-animation {
+    @apply overflow-hidden whitespace-nowrap border-r-4 border-primary inline-block animate-typing animate-blink-caret;
+  }
+  
+  /* Enhanced style components */
+  .line-numbered {
+    @apply relative pl-8;
+    counter-reset: line;
+  }
+  
+  .code-line-number {
+    @apply absolute left-0 text-muted-foreground text-xs opacity-70 w-6 text-right pr-2 select-none;
+  }
+  
+  .pattern-highlight {
+    @apply rounded px-0.5 transition-colors duration-300;
+  }
+  
+  .pattern-highlight-loop {
+    @apply bg-purple-500/10 hover:bg-purple-500/20;
+  }
+  
+  .pattern-highlight-api {
+    @apply bg-blue-500/10 hover:bg-blue-500/20;
+  }
+  
+  .pattern-highlight-debug {
+    @apply bg-yellow-500/10 hover:bg-yellow-500/20;
+  }
+  
+  .pattern-highlight-error {
+    @apply bg-red-500/10 hover:bg-red-500/20;
+  }
+  
+  .pattern-highlight-array {
+    @apply bg-green-500/10 hover:bg-green-500/20;
+  }
+  
+  /* Card states */
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-neon-purple;
+  }
+  
+  /* Animation utilities */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+  
+  .pulse {
+    @apply animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite];
+  }
+  
+  /* Scrollbar styling */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Tag connection animation */
+  .tag-connection {
+    @apply absolute w-[1px] bg-primary/50 animate-tag-connect;
+  }
+
+  /* Beautiful custom scrollbar for code containers */
+  .code-scrollbar, .group:hover .code-scrollbar, .group:focus-within .code-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #7c3aed #23272f;
+  }
+
+  .code-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+
+  .code-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #7c3aed 40%, #818cf8 100%);
+    border-radius: 8px;
+    min-height: 40px;
+    border: 2px solid #23272f;
+    transition: background 0.3s;
+  }
+
+  .code-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+  }
+
+  .code-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Hide scrollbar unless hovering or scrolling */
+  .code-scrollbar {
+    scrollbar-gutter: stable;
+    transition: background 0.3s;
+  }
+
+  .shiki {
+    background: transparent !important;
+    color: #d4d4d4 !important;
+    font-family: 'JetBrains Mono', 'Fira Code', 'monospace';
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .shiki span[style] {
+    color: unset !important;
+  }
+  .shiki .line {
+    display: block;
+    width: 100%;
+  }
+  .shiki .token.comment { color: #6a9955; }
+  .shiki .token.keyword { color: #c586c0; }
+  .shiki .token.string { color: #ce9178; }
+  .shiki .token.number { color: #b5cea8; }
+  .shiki .token.function { color: #dcdcaa; }
+  .shiki .token.type { color: #4ec9b0; }
+  .shiki .token.class { color: #4ec9b0; }
+  .shiki .token.constant { color: #569cd6; }
+  .shiki .token.tag { color: #569cd6; }
+  .shiki .token.attr-name { color: #9cdcfe; }
+  .shiki .token.attr-value { color: #ce9178; }
+  .shiki .token.punctuation { color: #d4d4d4; }
+  .shiki .token.operator { color: #d4d4d4; }
+
+  .code-editor, .code-editor pre, .code-editor code {
+    background-color: var(--card) !important;
+    box-shadow: none !important;
+  }
+}
